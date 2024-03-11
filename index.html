@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+</head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="styles.css">
+<title>Technical Documentation</title>
+
+<body>
+    <nav id="navbar">
+        <header>Web Accessibility</header>
+        <ul>
+            <li><a class="nav-link" href="#introduction">Introduction</a></li>
+            <li><a class="nav-link" href="#prerequisites">Prerequisites</a></li>
+            <li><a class="nav-link" href="#what_is_accessibility">What is accessibility</a></li>
+            <li><a class="nav-link" href="#html_accessibility">HTML accessibility</a></li>
+            <li><a class="nav-link" href="#css_and_javascript_accessibility">CSS and Javascript accessibility</a></li>
+            <li><a class="nav-link" href="#wai-aria_basics">WAI-ARIA basics</a></li>
+            <li><a class="nav-link" href="#mobile_accessibility">Mobile accessibility</a></li>
+            <li><a class="nav-link" href="#references">References</a></li>
+
+        </ul>
+    </nav>
+
+    <main id="main-doc">
+
+        <section class="main-section" id="introduction">
+            <header>Introduction</header>
+            <article>
+                <p>Website accessibility is essential in making the internet usable by everyone. When someone describes
+                    a site as "accessible", they mean that any user can use all its features and content, regardless of
+                    how the user accesses the web — even and especially users with physical or mental impairments.</p>
+            </article>
+        </section>
+
+        <section class="main-section" id="prerequisites">
+            <header>Prerequisites</header>
+            <article>
+                <p>This guide is written based on the assumption that you have some knowledge regarding HTML, CSS, and
+                    Javascript.</p>
+            </article>
+        </section>
+
+        <section class="main-section" id="what_is_accessibility">
+            <header>What is accessibility</header>
+            <article>
+                <p>Accessibility is the practice of making your websites usable by as many people as possible. We
+                    traditionally think of this as being about people with disabilities, but the practice of making
+                    sites accessible also benefits other groups such as those using mobile devices, or those with slow
+                    network connections.</p>
+                <p>Accessibility is the right thing to do. Providing accessible sites is part of the law in some
+                    countries, which can open up some significant markets that otherwise would not be able to use your
+                    services or buy your products.</p>
+            </article>
+        </section>
+
+        <section class="main-section" id="html_accessibility">
+            <header>HTML accessibility</header>
+            <aticle>
+                <p>A great deal of web content can be made accessible just by making sure the correct Hypertext Markup
+                    Language elements are used for the correct purpose at all times, which underlines the importance of
+                    using semantic HTML (sometimes called POSH, or Plain Old Semantic HTML). This means using the
+                    correct HTML elements for their intended purpose as much as possible.</p>
+                <p>For example, you can mark a control button to play a video like this:
+                <pre><code>&lt;div&gt;Play video&lt;/div&gt;</code></pre>
+                However, it makes more sense to use the correct element for the job:
+                <pre><code>&lt;button&gt;Play video&lt;/button&gt;</code></pre>
+                </p>
+                <p>Correct semantic markup has other benefits beyond accessibility:</p>
+                <ul>
+                    <li><strong>Easier to develop with</strong> — as mentioned above, you get some functionality for
+                        free, plus it is arguably easier to understand.</li>
+                    <li><strong>Better on mobile</strong> — semantic HTML is arguably lighter in file size than
+                        non-semantic spaghetti code, and easier to make responsive.</li>
+                    <li><strong>Good for SEO</strong> — search engines give more importance to keywords inside headings,
+                        links, etc. than keywords included in non-semantics, etc., so your documents will be more
+                        findable by customers.</li>
+                </ul>
+                </article>
+        </section>
+
+        <section class="main-section" id="css_and_javascript_accessibility">
+            <header>CSS and Javascript accessibility </header>
+            <article>
+                <p>CSS and JavaScript don't have the same immediate importance for accessibility as HTML, but they are
+                    still able to help or damage accessibility, depending on how they are used. To put it another way,
+                    it is important that you consider some best practice advice to make sure that your use of CSS and
+                    JavaScript doesn't ruin the accessibility of your documents.</p>
+                <p>It is possible to use CSS to make any HTML element look like anything, but this doesn't mean that you
+                    should. Using correct semantics has a lot to do with user expectations — elements look and behave in
+                    certain ways, according to their functionality, and these common conventions are expected by users.
+                </p>
+                <p>A web developer should:</p>
+                <ul>
+                    <li>Select sensible font sizes, line heights, letter spacing, etc. to make your text logical,
+                        legible, and comfortable to read.</li>
+                    <li>Make sure your headings stand out from your body text, typically big and bold like the default
+                        styling. Your lists should look like lists.</li>
+                    <li>Your text color should contrast well with your background color.</li>
+                </ul>
+                <p>JavaScript can also break accessibility, depending on how it is used. You should keep unobtrusive
+                    JavaScript in mind when creating your content. The idea of unobtrusive JavaScript is that it should
+                    be used wherever possible to enhance functionality, not build it in entirely — basic functions
+                    should ideally work without JavaScript, although it is appreciated that this is not always an
+                    option.</p>
+                <p>Good example uses of unobtrusive JavaScript include:</p>
+                <ul>
+                    <li>Providing client-side form validation, which alerts users to problems with their form entries
+                        quickly, without having to wait for the server to check the data. If it isn't available, the
+                        form will still work, but validation might be slower.</li>
+                    <li>Providing custom controls for HTML videos that are accessible to keyboard-only users, along with
+                        a direct link to the video that can be used to access it if JavaScript is not available (the
+                        default video browser controls aren't keyboard accessible in most browsers).</li>
+                </ul>
+                <p>See the example of form validation below:
+                <p>HTML</p>
+                <pre><code>&lt;label for="name">Enter your name:&lt;/label>
+&lt;input type="text" name="name" id="name" />
+</code></pre>
+                JS
+                <pre><code>form.onsubmit = validate;
+
+function validate(e) {
+  errorList.innerHTML = "";
+  for (let i = 0; i < formItems.length; i++) {
+    const testItem = formItems[i];
+    if (testItem.input.value === "") {
+      errorField.style.left = "360px";
+      createLink(testItem);
+    }
+  }
+
+  if (errorList.innerHTML !== "") {
+    e.preventDefault();
+  }
+}
+</code></pre>
+                </p>
+            </article>
+        </section>
+
+        <section class="main-section" id="wai-aria_basics">
+            <header>WAI-ARIA basics</header>
+            <article>
+                <p>WAI-ARIA (Web Accessibility Initiative - Accessible Rich Internet Applications) is a specification
+                    written by the W3C, defining a set of additional HTML attributes that can be applied to elements to
+                    provide additional semantics and improve accessibility wherever it is lacking. There are three main
+                    features defined in the spec: roles, properties, and states.</p>
+                <p>
+                <ul>
+                    <li>Roles: These define what an element is or does. Many of these are so-called landmark roles,
+                        which largely duplicate the semantic value of structural elements, such as
+                        <code>role="navigation"</code> or <code>role="complementary"</code>.</li>
+                    <li>Properties: These define properties of elements, which can be used to give them extra meaning or
+                        semantics. For example, <code>aria-required="true"</code> specifies that a form input needs to
+                        be filled in order to be valid, whereas <code>aria-labelledby="label"</code> allows you to put
+                        an ID on an element, then reference it as being the label for anything else on the page</li>
+                    <li>States: Special properties that define the current conditions of elements, for instance,
+                        <code>aria-disabled="true"</code> specifies to a screen reader that a form input is currently
+                        disabled.</li>
+                </ul>
+                </p>
+                <p>An important point about WAI-ARIA attributes is that they don't affect anything about the web page,
+                    except for the information exposed by the browser's accessibility APIs (where screen readers get
+                    their information from). WAI-ARIA doesn't affect webpage structure, the DOM, etc., although the
+                    attributes can be useful for selecting elements by CSS.</p>
+
+            </article>
+        </section>
+
+
+
+        </article>
+        </section>
+
+        <section class="main-section" id="mobile_accessibility">
+            <header>Mobile accessibility</header>
+            <article>
+                <p>With web access on mobile devices being so popular and renowned platforms such as iOS and Android
+                    having full-fledged accessibility tools, it is important to consider the accessibility of your web
+                    content on these platforms.
+                <p>
+                <p>These days, mobile devices can usually handle fully-featured websites, and the main platforms even
+                    have screen readers built in to enable visually impaired users to use them successfully. Modern
+                    mobile browsers tend to have good support for WAI-ARIA, too.</p>
+
+
+            </article>
+        </section>
+
+
+
+        <section class="main-section" id="references">
+            <header>References</header>
+            <article>
+                <p>This technical documentaiton is built for the <a
+                        href="https://www.freecodecamp.org/">freeCodeCamp</a> project. All the information is taken from
+                    <a href="https://developer.mozilla.org/en-US/docs/Learn/Accessibility">MDN</a>.</p>
+            </article>
+        </section>
+
+
+
+    </main>
+</body </html>
